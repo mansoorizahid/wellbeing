@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Well Being</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: url('paper.jpg') center/cover no-repeat fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+            position: relative; /* Added position relative for positioning the underline */
+        }
+
+        nav a:hover {
+            color: yellow; /* Change color on hover */
+        }
+
+        nav a:hover::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px; /* Adjust the underline height */
+            bottom: 0;
+            left: 0;
+            background-color: yellow; /* Underline color on hover */
+        }
+
+        .glass-container h1 {
+            margin: 0;
+            font-size: 50px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .author-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            color: white;
+        }
+
+        .author-info img {
+            border-radius: 50%;
+            margin-right: 20px;
+            width: 120px;
+            height: 120px;
+            object-fit: cover; /* Prevent image stretching */
+        }
+
+        .author-info p {
+            font-size: 30px;
+            color: white;
+            font-weight: 500;
+        }
+        .glass-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .glass-container h1 {
+            background: rgba(0, 0, 0, 0.5); /* Increased opacity for darker background */
+            box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.7); /* Wider, darker shadow */
+            backdrop-filter: blur(2px); /* Slightly sharper blur for defined edges */
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.35); /* Darker border */
+            padding: 20px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9); /* Slightly brighter text for better contrast */
+            font-size: 50px;
+            font-style: italic;
+            font-family: "Playfair Display", "Bookman", serif;
+        }
+
+        .glass-container .author-info {
+            background: rgba(0, 0, 0, 0.5); /* Increased opacity for darker background */
+            box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.7); /* Wider, darker shadow */
+            backdrop-filter: blur(2px); /* Slightly sharper blur */
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 10px;
+            border: 1px solid rgba(50, 50, 50, 0.25); /* Darker gray border for separation */
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.9); /* Slightly brighter text */
+            font-family: "Playfair Display", "Bookman", serif;
+        }
+
+        .glass-container .author-info img {
+            border-radius: 50%;
+            margin-right: 10px;
+            width: 80px;
+            height: 80px;
+        }
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: -5px; /* Adjust the padding to your preference */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="homepage.html">Home</a> |
+        <a href="happiness.html">Charts</a> |
+        <a href="happinessindex.html">Analysis</a>
+    </nav>
+
+    <div class="glass-container">
+        <h1>United Kingdom Personal Well Being</h1>
+        <div class="author-info">
+            <img src="Linkedin.jpg" alt="Author Image">
+            <p>- ZAHID MANSOORI ( Data Analyst )</p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; Copyright | 2023 Zahid Mansoori | </p>
+    </footer>
+</body>
+</html>

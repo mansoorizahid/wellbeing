@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>United Kingdom Personal Well Being Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 0.03em;
+        }
+
+        .six {
+            text-align: center;
+            color: #222;
+            font-size: 30px;
+            font-weight: 400;
+            text-transform: uppercase;
+            word-spacing: 1px;
+            letter-spacing: 2px;
+            color: #c50000;
+            margin-top: 20px;
+            position: relative;
+            font-style: italic;
+            font-family: "Playfair Display", "Bookman", serif;
+
+        }
+
+        .six span {
+            line-height: 2em;
+            padding-bottom: 15px;
+            text-transform: none;
+            font-size: 0.7em;
+            font-weight: normal;
+            font-style: italic;
+            font-family: "Playfair Display", "Bookman", serif;
+            color: #999;
+            letter-spacing: -0.005em;
+            word-spacing: 1px;
+            letter-spacing: none;
+        }
+
+        .six:after,
+        .six:before {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 45px;
+            height: 4px;
+            content: "";
+            right: 45px;
+            margin: auto;
+            background-color: #ccc;
+        }
+
+        .six:before {
+            background-color: #d78b8b;
+            left: 45px;
+            width: 90px;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+
+        .chart {
+            width: 30%;
+            height: 300px;
+            background-color: transparent;
+        }
+
+        .chart-description {
+            width: 70%;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+    </style>
+
+    <style>
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chart {
+            width: 100%;
+            height: 300px; /* Adjust the height as needed */
+        }
+
+        .chart-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .six h1 {
+            text-align: center;
+            color: #222;
+            font-size: 30px;
+            font-weight: 400;
+            text-transform: uppercase;
+            word-spacing: 1px;
+            letter-spacing: 2px;
+            color: #c50000;
+        }
+
+        .six h1 span {
+            line-height: 2em;
+            padding-bottom: 15px;
+            text-transform: none;
+            font-size: 0.7em;
+            font-weight: normal;
+            font-style: italic;
+            font-family: "Playfair Display", "Bookman", serif;
+            color: #999;
+            letter-spacing: -0.005em;
+            word-spacing: 1px;
+            letter-spacing: none;
+        }
+
+        .six h1:after, .six h1:before {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 45px;
+            height: 4px;
+            content: "";
+            right: 45px;
+            margin:auto;
+            background-color: #ccc;
+        }
+
+        .six h1:before { 
+            background-color: #d78b8b;
+            left: 45px;
+            width: 90px;
+        }
+
+        .chart-description {
+            padding: 20px;
+        }
+
+        .chart-description h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .chart-description p {
+            font-size: 14px;
+            color: #666;
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+            position: relative; /* Added position relative for positioning the underline */
+        }
+
+        nav a:hover {
+            color: yellow; /* Change color on hover */
+        }
+
+        nav a:hover::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px; /* Adjust the underline height */
+            bottom: 0;
+            left: 0;
+            background-color: yellow; /* Underline color on hover */
+        }
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: -5px; /* Adjust the padding to your preference */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<nav>
+    <a href="homepage.html">Home</a> |
+    <a href="happiness.html">Charts</a> |
+    <a href="happinessindex.html">Analysis</a>
+</nav>
+<body>
+    <header>
+        <h1>United Kingdom Personal Well Being</h1>
+    </header>
+
+    <div class="six">
+        <h1>Well-being Measures
+            <span>Understanding the Trends Over Time</span>
+        </h1>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="anxietyChart" class="chart"></canvas>
+        <div class="chart-description">
+            <h2>Anxiety</h2>
+            <p>
+                <strong>1. Economic Uncertainty :</strong><br>
+                The substantial increase in anxiety (3.23) is attributed to heightened economic uncertainty, reflecting challenges in job markets and financial stability.
+              </p>
+              <p>
+                <strong>2. Social Isolation :</strong><br>
+                Rising anxiety levels are linked to increased social isolation, a consequence of global events impacting social interactions and mental well-being.
+              </p>
+              <p>
+                <strong>3. Health Concerns :</strong><br>
+                The surge in anxiety is influenced by growing health concerns, likely related to the ongoing health crisis and other public health issues.
+              </p>
+              
+        </div>
+
+        <canvas id="happinessChart" class="chart"></canvas>
+        <div class="chart-description">
+            <h2>Happiness</h2>
+            <p>
+                <strong>1. Community Engagement :</strong><br>
+                The slight decrease in happiness (7.39) is associated with reduced community engagement, indicating challenges in maintaining social connections.
+              </p>
+              <p>
+                <strong>2. Work-Life Balance :</strong><br>
+                The marginal decrease in overall happiness signals a dip in work-life balance, highlighting stressors in professional life.
+              </p>
+              <p>
+                <strong>3. Environmental Factors :</strong><br>
+                Happiness sees a decrease linked to environmental concerns, reflecting the impact of climate change and societal issues.
+              </p>
+              
+        </div>
+
+        <canvas id="lifeSatisfactionChart" class="chart"></canvas>
+        <div class="chart-description">
+            <h2>Life Satisfaction</h2>
+            <p>
+                <strong>1. Quality of Relationships :</strong><br>
+                The decrease in life satisfaction (7.45) is linked to a decline in the quality of personal relationships, impacting overall contentment.
+              </p>
+              <p>
+                <strong>2. Career Fulfillment :</strong><br>
+                Rising anxiety levels are linked to increased social isolation, a consequence of global events impacting social interactions and mental well-being.
+              </p>
+              <p>
+                <strong>3. Personal Well-being Perception :</strong><br>
+                A clear decline in how individuals perceive their personal well-being contributes to the decrease in life satisfaction.
+              </p>
+              
+        </div>
+
+        <canvas id="worthwhileChart" class="chart"></canvas>
+        <div class="chart-description">
+            <h2>Worthwhile</h2>
+            <p>
+                <strong>1. Sense of Purpose :</strong><br>
+                The reduction in Worthwhile (7.73) is linked to a diminishing sense of purpose, indicating challenges in finding meaning in daily activities.
+              </p>
+              <p>
+                <strong>2. Social Contribution :</strong><br>
+                Despite the overall decrease, a slight increase in social contribution suggests a nuanced relationship between Worthwhile and community engagement.
+              </p>
+              <p>
+                <strong>3. Economic Factors :</strong><br>
+                Worthwhile is influenced by economic factors, with the decrease reflecting challenges or uncertainties in financial stability and personal fulfillment.
+              </p>
+              
+        </div>
+    </div>
+    <footer>
+        <p>&copy; Copyright | 2023 Zahid Mansoori | </p>
+    </footer>
+
+    <script>
+        // Your chart creation scripts here...
+    
+        // Your data
+        var data = {
+            'MeasureOfWellbeing': ['2011-12', '2012-13', '2013-14', '2014-15', '2015-16', '2016-17', '2017-18', '2018-19', '2019-20', '2020-21', '2021-22', '2022-23'],
+            'Anxiety': [3.13, 3.03, 2.92, 2.86, 2.87, 2.9, 2.89, 2.87, 3.05, 3.31, 3.12, 3.23],
+            'Happiness': [7.29, 7.3, 7.39, 7.46, 7.48, 7.51, 7.52, 7.56, 7.47, 7.32, 7.45, 7.39],
+            'Life satisfaction': [7.42, 7.46, 7.51, 7.61, 7.65, 7.68, 7.69, 7.71, 7.66, 7.39, 7.54, 7.45],
+            'Worthwhile': [7.67, 7.7, 7.74, 7.82, 7.84, 7.86, 7.88, 7.89, 7.86, 7.71, 7.77, 7.73]
+        };
+    
+        // Function to create a chart with animation
+        function createAnimatedChartWithLabelsOnTop(canvasId, label, xValues, yValues, color, markerIndices) {
+    var ctx = document.getElementById(canvasId).getContext('2d');
+
+    // Get the maximum y-value for positioning the labels
+    var maxY = Math.max(...yValues);
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets: [{
+                label: label,
+                data: yValues,
+                borderColor: color,
+                backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                pointBackgroundColor: color,
+                borderWidth: 1,
+                pointRadius: function (context) {
+                    var index = context.dataIndex;
+                    return markerIndices.includes(index) ? 8 : 4;
+                },
+                pointHoverRadius: 5
+            }]
+        },
+        options: {
+            responsive: false,
+            animation: {
+                duration: 1000,
+                easing: 'linear',
+            },
+            scales: {
+                x: {
+                    display: true,
+                    grid: {
+                        drawOnChartArea: false
+                    }
+                },
+                y: {
+                    display: true,
+                    grid: {
+                        drawOnChartArea: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                        labels: {
+                            color: 'rgb(255, 99, 132)'
+                        }
+                },  
+            }
+        }
+    });
+}
+
+// Indices of the points where you want larger markers
+var markerIndices = [8];
+
+// Create animated charts with labels on top
+createAnimatedChartWithLabelsOnTop('anxietyChart', 'Anxiety', data['MeasureOfWellbeing'], data['Anxiety'], 'blue', markerIndices);
+createAnimatedChartWithLabelsOnTop('happinessChart', 'Happiness', data['MeasureOfWellbeing'], data['Happiness'], 'green', markerIndices);
+createAnimatedChartWithLabelsOnTop('lifeSatisfactionChart', 'Life Satisfaction', data['MeasureOfWellbeing'], data['Life satisfaction'], 'red', markerIndices);
+createAnimatedChartWithLabelsOnTop('worthwhileChart', 'Worthwhile', data['MeasureOfWellbeing'], data['Worthwhile'], 'purple', markerIndices);
+
+    </script>
+    
+    
+    
+    
+</body>
+</html>
+
+</html>
