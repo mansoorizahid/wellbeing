@@ -77,6 +77,40 @@
             margin-top: 10px;
             height: 40px;
         }
+        @media screen and (max-width: 768px) {
+            .chart-container {
+                grid-template-columns: 1fr; /* Change to a single column layout for smaller screens */
+            }
+
+            .chart {
+                height: 200px; /* Adjust the height for smaller screens */
+            }
+
+            .chart-title {
+                font-size: 16px; /* Adjust the font size for smaller screens */
+                margin-bottom: 10px;
+            }
+            .chart-description {
+                padding: 10px; /* Adjust padding for smaller screens */
+                width: 90%;
+            }
+
+            .chart-description h2 {
+                font-size: 18px; /* Adjust font size for smaller screens */
+                margin-bottom: 8px;
+            }
+
+            .chart-description p {
+                font-size: 12px; /* Adjust font size for smaller screens */
+            }
+            .six {
+                font-size: 20px;
+
+            }
+            .six span {
+                font-size: 0.5em;
+            }
+        }
     </style>
 </head>
 <nav>
